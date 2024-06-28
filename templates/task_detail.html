@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ task.name }}</h1>
+  <p>{{ task.description }}</p>
+  <p>Created at: {{ task.created_at }}</p>
+  <p>Completed at: {{ task.completed_at }}</p>
+  <p>Status: {{ task.status }}</p>
+  <a class="btn btn-primary" href="{% url 'task_edit' task.id %}">Edit</a>
+  <form action="{% url 'task_delete' task.id %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+  <a class="btn btn-secondary" href="{% url 'task_list' %}">Back to List</a>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Task List</h1>
+  <form method="get" class="form-inline mb-3">
+    {{ filter_form.as_p }}
+    <button type="submit" class="btn btn-primary">Filter</button>
+  </form>
+  <a class="btn btn-success mb-3" href="{% url 'task_add' %}">Add Task</a>
+  <ul class="list-group">
+    {% for task in tasks %}
+      <li class="list-group-item">
+        <a href="{% url 'task_detail' task.id %}">{{ task.name }}</a>
+        <span class="badge badge-secondary">{{ task.status }}</span>
+      </li>
+    {% empty %}
+      <li class="list-group-item">No tasks available.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
